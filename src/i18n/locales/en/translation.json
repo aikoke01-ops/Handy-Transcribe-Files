@@ -14,6 +14,7 @@
     "advanced": "Advanced",
     "postProcessing": "Post Process",
     "history": "History",
+    "fileTranscribe": "Transcribe File",
     "debug": "Debug",
     "about": "About"
   },
@@ -156,6 +157,18 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}} Settings"
+    },
+    "fileTranscribe": {
+      "title": "Transcribe File",
+      "description": "Transcribe an audio or video file from your computer instead of recording live.",
+      "filterName": "Audio & Video",
+      "chooseFile": "Choose file...",
+      "transcribe": "Transcribe",
+      "transcribing": "Transcribing...",
+      "resultTitle": "Transcript",
+      "copy": "Copy to clipboard",
+      "copied": "Transcript copied to clipboard",
+      "emptyResult": "No speech was detected in that file."
     },
     "general": {
       "title": "General",

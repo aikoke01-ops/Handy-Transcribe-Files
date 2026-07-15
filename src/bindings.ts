@@ -789,6 +789,23 @@ async unloadModelManually() : Promise<Result<null, string>> {
     else return { status: "error", error: e  as any };
 }
 },
+/**
+ * Transcribe an arbitrary audio or video file the user picked from disk
+ * (as opposed to a live microphone recording). Decodes/resamples the file
+ * to 16 kHz mono via `audio_toolkit::decode_media_file_to_16k_mono` (which
+ * falls back to a system `ffmpeg` for containers our built-in decoder can't
+ * handle), then runs it through the same transcription pipeline used for
+ * recordings. If no model is currently loaded, the user's selected model is
+ * loaded first.
+ */
+async transcribeMediaFile(path: string) : Promise<Result<string, string>> {
+    try {
+    return { status: "ok", data: await TAURI_INVOKE("transcribe_media_file", { path }) };
+} catch (e) {
+    if(e instanceof Error) throw e;
+    else return { status: "error", error: e  as any };
+}
+},
 async getHistoryEntries(cursor: number | null, limit: number | null) : Promise<Result<PaginatedHistory, string>> {
     try {
     return { status: "ok", data: await TAURI_INVOKE("get_history_entries", { cursor, limit }) };
@@ -846,10 +863,8 @@ async updateRecordingRetentionPeriod(period: string) : Promise<Result<null, stri
 }
 },
 /**
- * Checks if the Mac is a laptop by detecting battery presence
- * 
- * This uses pmset to check for battery information.
- * Returns true if a battery is detected (laptop), false otherwise (desktop)
+ * Stub implementation for non-macOS platforms
+ * Always returns false since laptop detection is macOS-specific
  */
 async isLaptop() : Promise<Result<boolean, string>> {
     try {

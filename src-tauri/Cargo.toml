@@ -81,6 +81,21 @@ specta = "=2.0.0-rc.22"
 specta-typescript = "0.0.9"
 tauri-specta = { version = "=2.0.0-rc.21", features = ["derive", "typescript"] }
 tauri-plugin-dialog = "2.6"
+# Used to decode arbitrary user-provided audio/video files (mp3, m4a/aac, ogg,
+# flac, wav, mp4 audio tracks, ...) for the "transcribe from file" feature, so
+# users aren't limited to live microphone input. Containers/codecs symphonia
+# can't handle (e.g. many .mkv/.avi videos) fall back to a system `ffmpeg`
+# invocation if one is available on PATH (see audio_toolkit::audio::file_decode).
+symphonia = { version = "0.5", features = [
+  "mp3",
+  "aac",
+  "isomp4",
+  "ogg",
+  "vorbis",
+  "flac",
+  "wav",
+  "pcm",
+] }
 hf-hub = { git = "https://github.com/cjpais/hf-hub", branch = "cancellable-downloads", features = [
   "tokio",
 ] }
